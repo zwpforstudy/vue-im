@@ -1,9 +1,12 @@
 import Vue from 'vue'
-import App from './App'
+import VueResource from 'vue-resource'
 
-/* eslint-disable no-new */
+import App from './App'
+import router from './routers'
+
+Vue.use(VueResource)
+
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App }
-})
+  router: router,
+  render: h => h(App)
+}).$mount('#app')
