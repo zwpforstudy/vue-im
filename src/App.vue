@@ -6,7 +6,7 @@
         <router-link to="/">首页</router-link>
       </div>
       <div class="col-xs-6 col-md-4">
-        <router-link to="/login">登陆</router-link>
+        <router-link to="/userlist">进入聊天</router-link>
       </div>
     </div>
     <router-view></router-view>
