@@ -3,18 +3,25 @@
     <!--<login></login>-->
     <div class="row">
       <div class="col-xs-6 col-md-4">
-        <router-link to="/">首页</router-link>
+        <router-link to="/">{{ welcome }}</router-link>
       </div>
       <div class="col-xs-6 col-md-4">
-        <router-link to="/userlist">进入聊天</router-link>
+        <router-link to="/userlist">{{ selector }}</router-link>
       </div>
     </div>
     <router-view></router-view>
   </div>
 </template>
 
-<script>
+<script type="text/javascript">
   export default {
+    name: 'app',
+    data: function () {
+      return {
+        welcome: '首页',
+        selector: '进入聊天'
+      }
+    }
   }
 </script>
 

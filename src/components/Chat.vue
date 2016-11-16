@@ -12,13 +12,16 @@
 <style>
 
 </style>
-<script>
+<script type="text/javascript">
+    import Config from '../../config/index'
     export default{
         name: 'Chat',
         data: function () {
             let initData = {}
             let userId = this.$route.params.userId
-            let socket = new WebSocket('ws://echo.websocket.org/')
+            let websocketUrl = Config.dev.env.WS_LOCATION
+
+            let socket = new WebSocket(websocketUrl)
             let msgList = []
 
             socket.onopen = function(evt) {
