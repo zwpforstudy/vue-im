@@ -1,16 +1,45 @@
 <template>
   <div class="userlist-container">
-    <h1>{{ msg }}</h1>
-    <div class="users">
-      <h1 v-if="onLoad">加载中</h1>
-      <p v-for="user in users" class="bg-info">
+    <h4>{{ msg }}</h4>
+    <h1 v-if="onLoad">加载中</h1>
+    <ul class="users">
+      <li v-for="user in users" class="bg-info">
         <a href="#" @click="connect" :userid="user.id">{{ user.name }}</a>
-      </p>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
-<style>
+<style lang="scss">
+  .userlist-container{
+    width: 600px;
+    height: 60%;
+    margin: 150px auto;
+    border: 1px solid #f0f0f0;
+    padding: 20px;
+    h4{
+      margin-bottom: 20px;
+    }
+    .users{
+      font-size: 0;
+      list-style: none;
+      li{
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 10px;
+        font-size: 20px;
+        text-align: center;
+        background-color: #00d6b2;
+        a{
+          text-decoration: none;
 
+        }
+      }
+    }
+  }
 </style>
 <script type="text/javascript">
   import Config from '../../config/index'
