@@ -18,7 +18,7 @@
     name: "UserList",
     data: function () {
       let initData = {}
-      var users = []
+      let users = []
 
       this.$http.get(Config.dev.env.API_HOST + 'v1/users').then((response) => {
         let respData = response.data
