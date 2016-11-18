@@ -5,9 +5,9 @@
       <!-- 左边 -->
       <div class="col-md-4 chat-left">
         <h2>在线用户:</h2>
-        <p v-for="user in onlineUsers" class="bg-info">
+        <li v-for="user in onlineUsers" class="bg-info">
           <a href="#" @click="say" :userid="user.id" :nickname="user.name">{{ user.name }}</a>
-        </p>
+        </li>
       </div>
 
       <!-- 右边 -->
@@ -27,7 +27,9 @@
         </div>
       </div>
     </div>
-    <h1 v-else>正在加载...</h1>
+    <div class="loading-div" v-if="onLoad">
+      <loading-component></loading-component>
+  </div>
   </div>
 </template>
 <style>
@@ -36,6 +38,8 @@
 <script type="text/javascript">
   import Config from '../../config/index'
   import {buildAuthMsg, buildTextMsg, buildDisconnectMsg} from '../websocket.util'
+  import LoadingComponent from './loading.vue'
+
   export default{
     name: 'Chat',
     data: function () {
@@ -151,6 +155,9 @@
       console.log('从 [' + from.path + ']离开，去往[' + to.path + '].')
       this.socket.send(JSON.stringify(buildDisconnectMsg(this.currUser.userId)))
       next()
+    },
+    components: {
+      LoadingComponent
     }
   }
 </script>
