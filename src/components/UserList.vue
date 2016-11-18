@@ -1,7 +1,9 @@
 <template>
   <div class="userlist-container">
-    <h4>{{ msg }}</h4>
-    <h1 v-if="onLoad">加载中</h1>
+    <!--<h4>{{ msg }}</h4>-->
+    <div class="loading-div" v-if="onLoad">
+      <loading-component></loading-component>
+    </div>
     <ul class="users">
       <li v-for="user in users" class="bg-info">
         <a href="#" @click="connect" :userid="user.id">{{ user.name }}</a>
@@ -18,6 +20,10 @@
     padding: 20px;
     h4{
       margin-bottom: 20px;
+    }
+    #loading-div{
+      width:54px;
+      height:25px;
     }
     .users{
       font-size: 0;
@@ -43,6 +49,8 @@
 </style>
 <script type="text/javascript">
   import Config from '../../config/index'
+  import LoadingComponent from './loading.vue'
+
   export default {
     name: "UserList",
     data: function () {
@@ -68,6 +76,9 @@
         let userId = eventTarget.getAttribute("userid")
         this.$router.push("/chat/" + userId)
       }
+    },
+    components: {
+      LoadingComponent
     }
   }
 </script>
