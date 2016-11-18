@@ -57,6 +57,10 @@ module.exports = {
         loader: 'babel',
         include: projectRoot,
         exclude: /node_modules/
+      },{
+        test: /\.scss$/,
+        loaders: ['style','css','sass'],
+        include: projectRoot
       },
       {
         test: /\.json$/,
