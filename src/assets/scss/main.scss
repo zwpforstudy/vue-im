@@ -1,0 +1,32 @@
+//变量
+$border : 1px solid #999999;
+
+//样式
+html,body,.container{
+  width: 100%;
+  height: 100%;
+}
+div,p,ul,ol,li,h1,h2,h3,h4,h5,h6{
+  margin: 0;
+  padding: 0;
+}
+*{
+  box-sizing: border-box;
+}
+
+.container{
+  position: relative;
+  .im-container{
+    width: 500px;
+    height: 650px;
+    border: $border;
+    border-radius: 10px;
+    box-shadow: 0 0 10px;
+    position: relative;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+  }
+}
+

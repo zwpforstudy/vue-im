@@ -8,6 +8,7 @@
         <li v-for="user in onlineUsers" class="bg-info">
           <a href="#" @click="say" :userid="user.id" :nickname="user.name">{{ user.name }}</a>
         </li>
+
       </div>
 
       <!-- 右边 -->
@@ -27,9 +28,6 @@
         </div>
       </div>
     </div>
-    <div class="loading-div" v-if="onLoad">
-      <loading-component></loading-component>
-  </div>
   </div>
 </template>
 <style>
@@ -37,8 +35,7 @@
 </style>
 <script type="text/javascript">
   import Config from '../../config/index'
-  import {buildAuthMsg, buildTextMsg, buildDisconnectMsg} from '../websocket.util'
-  import LoadingComponent from './loading.vue'
+  import {buildAuthMsg, buildTextMsg, buildDisconnectMsg} from '../websocket.util.js'
 
   export default{
     name: 'Chat',
@@ -125,7 +122,7 @@
       this.$http.get(Config.dev.env.API_HOST + 'v1/userinfo?id=' + userId).then((response) => {
         let respData = response.data
         console.log('nickname: ' + respData.data.name)
-        currUser.nickname= respData.data.name
+        currUser.nickname = respData.data.name
       }).catch((response) => {
         console.log("Api Err: " + JSON.stringify(response))
       })
@@ -155,9 +152,6 @@
       console.log('从 [' + from.path + ']离开，去往[' + to.path + '].')
       this.socket.send(JSON.stringify(buildDisconnectMsg(this.currUser.userId)))
       next()
-    },
-    components: {
-      LoadingComponent
     }
   }
 </script>

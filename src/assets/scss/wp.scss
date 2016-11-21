@@ -1,0 +1,25 @@
+//按钮
+.btn{
+  font-size: 14px;
+  background-color: #36648B;
+  color: #DDA0DD;
+  text-align: center;
+  vertical-align: middle;
+  outline: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  &:hover,&:active,&:focus{
+    background-color: #4682B4;
+    color: #DDA0DD;
+    outline: none;
+  }
+}
+.btn-lg{
+  width: 240px;
+  height: 46px;
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 6px 10px;
+  border-radius: 23px;
+}

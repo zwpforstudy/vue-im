@@ -4,10 +4,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Hello from './components/Hello'
-import Login from './components/Login'
-import UserList from './components/UserList'
-import Chat from './components/Chat'
+import Home from './views/Home'
+import Login from './views/Login'
+import Selector from './views/Selector'
+import Chat from './views/Chat'
 
 Vue.use(VueRouter)
 
@@ -18,7 +18,7 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'welcome',
-      component: Hello
+      component: Home
     },
     {
       path: '/login',
@@ -26,9 +26,9 @@ const router = new VueRouter({
       component: Login
     },
     {
-      path: '/userlist',
-      name: 'userlist',
-      component: UserList
+      path: '/selector',
+      name: 'selector',
+      component: Selector
     },
     {
       path: '/chat/:userId',
