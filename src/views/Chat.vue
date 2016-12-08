@@ -74,9 +74,45 @@
             }
             .chat-content-right{
                 width: 345px;
-                padding-left: 20px;
-                .chat-msg{
-                    list-style: none;
+
+                .chat-right-top{
+                    height: 500px;
+                    .chat-msg{
+                        list-style: none;
+                        .chat-msg-item{
+                            border: $border;
+                            max-width: 200px;
+                        }
+                    }
+                    .chat-with{
+                        padding: 10px 20px;
+                        color: #949494;
+                    }
+                }
+                .chat-right-bottom{
+                    font-size: 0;
+                    div{
+                        display: inline-block;
+                        *display: inline;
+                        *zoom: 1;
+                        height: 80px;
+                        font-size: 16px;
+                        &.chat-edit{
+                            width: 280px;
+                            textarea{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        &.chat-send{
+                            width: 65px;
+                            vertical-align: top;
+                            button{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                    }
                 }
             }
         }
