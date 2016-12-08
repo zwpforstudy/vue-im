@@ -4,10 +4,13 @@
           <loading-component></loading-component>
       </div>
       <div class="selector" v-else>
-          <div class="refresh"></div>
-          <ul class="users" >
-              <li v-for="user in users" class="bg-info">
-                <a href="#" @click="connect" :userid="user.id">{{ user.name }}</a>
+          <div class="refresh">
+              <button class="btn">刷新</button>
+          </div>
+          <ul class="users">
+              <li v-for="user in users" :userid="user.id" @click="connect">
+                <a >{{ user.name }}</a>
+                <div class="mask"></div>
               </li>
           </ul>
       </div>
@@ -17,19 +20,54 @@
 <style lang="scss">
     @import "../assets/scss/main.scss";
     .selector-container{
-
         .selector{
-
             .refresh{
+                /*position: ;*/
+                /*top: 0;*/
+                /*left: 0;*/
+                width: 100%;
                 height: 50px;
+                border-bottom: $border;
+                button{
+                    position: absolute;
+                    right: 0;
+                    margin: 10px;
+                }
             }
             .users{
+                overflow: auto;
+                height: 600px;
                 list-style: none;
+                padding: 10px 0;
                 li{
-                    height: 45px;
-                    line-height: 45px;
-                    padding: 0 10px;
-                    border-bottom: $border;
+                    margin: 10px auto;
+                    width: 200px;
+                    height: 100px;
+                    border: $border;
+                    border-radius: 5px;
+                    text-align: center;
+                    background-color: #363636;
+                    position: relative;
+                    a{
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        color: #f0f0f0;
+                        font-size: 25px;
+                        line-height: 100px;
+                        text-decoration: none;
+                    }
+                    .mask{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        opacity:0.3;
+                        /*兼容IE8及以下版本浏览器*/
+                        filter: alpha(opacity=30);
+                        z-index: 10;
+                    }
                 }
             }
         }
@@ -60,7 +98,7 @@
     },
     methods: {
       connect: function (evt) {
-        let eventTarget = evt.target
+        let eventTarget = evt.target.parentNode;
         let userId = eventTarget.getAttribute("userid")
         this.$router.push("/chat/" + userId)
       }

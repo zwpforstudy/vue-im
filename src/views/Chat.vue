@@ -1,37 +1,87 @@
 <template>
   <div class="chat-container">
-    <h1>Chat-Room</h1>
-    <div class="row" v-if="connSuccess">
-      <!-- 左边 -->
-      <div class="col-md-4 chat-left">
-        <h2>在线用户:</h2>
-        <li v-for="user in onlineUsers" class="bg-info">
-          <a href="#" @click="say" :userid="user.id" :nickname="user.name">{{ user.name }}</a>
-        </li>
-
+      <div class="chat-div" v-if="connSuccess">
+          <div class="chat-header">
+              <div class="current-user">{{ currUser.nickname }}</div>
+              <div class="close">X</div>
+          </div>
+          <div class="chat-content">
+              <ul class="chat-content-left" id="onlineUsersList">
+                    <li v-for="user in onlineUsers" :userid="user.id"
+                        :nickname="user.name">{{ user.name }}</li>
+              </ul>
+              <div class="chat-content-right">
+                  <div class="chat-right-top">
+                      <div class="chat-with">{{ speakToUser.nickname }}</div>
+                      <ul class="chat-msg">
+                          <li class="chat-msg-item" v-for="msg in msgList">{{ msg }}</li>
+                      </ul>
+                  </div>
+                  <div class="chat-right-bottom">
+                      <div class="chat-edit">
+                          <textarea v-model="inputMsg"></textarea>
+                      </div>
+                      <div class="chat-send">
+                          <button>发送</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-
-      <!-- 右边 -->
-      <div class="col-md-8 chat-right">
-        <!-- 聊天记录 -->
-        <h2>我是 {{ currUser.nickname }}</h2>
-        <h2>与 {{ speakToUser.nickname }} 聊天~</h2>
-        <div class="chat-right-top">
-          <h5>聊天记录</h5>
-          <h5 v-for="msg in msgList"> {{ msg }}</h5>
-        </div>
-
-        <div class="chat-right-bottom">
-          <input type="text" class="form-control" v-model="inputMsg"/>
-          <br>
-          <button type="button" class="btn btn-primary" @click="doSend">Send</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
-<style>
-
+<style lang="scss">
+  @import "../assets/scss/main.scss";
+.chat-container{
+    .chat-div{
+        .chat-header{
+            height: 70px;
+            border-bottom: $border;
+            position: relative;
+            font-size: 30px;
+            padding: 0 20px;
+            .current-user{
+                line-height: 70px;
+            }
+            .close{
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 50px;
+                height: 50px;
+                border: $border;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 50px;
+            }
+        }
+        .chat-content{
+            height: 580px;
+            font-size: 0;
+            letter-spacing: -3px;
+            .chat-content-left,.chat-content-right{
+                height: 100%;
+                display: inline-block;
+                vertical-align: top;
+                letter-spacing: 0;
+                font-size: 14px;
+                *display: inline;
+                *zoom: 1;
+            }
+            .chat-content-left{
+                width: 150px;
+                border-right: $border;
+            }
+            .chat-content-right{
+                width: 345px;
+                padding-left: 20px;
+                .chat-msg{
+                    list-style: none;
+                }
+            }
+        }
+    }
+}
 </style>
 <script type="text/javascript">
   import Config from '../../config/index'
@@ -119,6 +169,8 @@
       //4.当前用户
       let currUser = {}
       currUser.userId = userId
+      currUser.nickname = ''
+
       this.$http.get(Config.dev.env.API_HOST + 'v1/userinfo?id=' + userId).then((response) => {
         let respData = response.data
         console.log('nickname: ' + respData.data.name)
