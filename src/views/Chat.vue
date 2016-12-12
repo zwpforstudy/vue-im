@@ -3,10 +3,10 @@
       <div class="chat-div" v-if="connSuccess">
           <div class="chat-header">
               <div class="current-user">{{ currUser.nickname }}</div>
-              <div class="close">X</div>
+              <div class="close" @click="close()">X</div>
           </div>
           <div class="chat-content">
-              <ul class="chat-content-left" id="onlineUsersList">
+              <ul class="chat-content-left" id="onlineUsersList" @click="say($event)">
                     <li v-for="user in onlineUsers" :userid="user.id"
                         :nickname="user.name">{{ user.name }}</li>
               </ul>
@@ -21,7 +21,7 @@
                       <div class="chat-edit">
                           <textarea v-model="inputMsg"></textarea>
                       </div>
-                      <div class="chat-send">
+                      <div class="chat-send" @click="doSend();">
                           <button>发送</button>
                       </div>
                   </div>
@@ -53,6 +53,11 @@
                 border-radius: 50%;
                 text-align: center;
                 line-height: 50px;
+                cursor: pointer;
+                &:hover{
+                    background: #00d6b2;
+                    color: #fff;
+                }
             }
         }
         .chat-content{
@@ -71,10 +76,20 @@
             .chat-content-left{
                 width: 150px;
                 border-right: $border;
+                list-style: none;
+                li{
+                    cursor: pointer;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                    &:hover{
+                        background-color: #DDDDDD;
+                        color: #00d6b2;
+                    }
+                }
             }
             .chat-content-right{
-                width: 345px;
-
+                width: 348px;
                 .chat-right-top{
                     height: 500px;
                     .chat-msg{
@@ -95,21 +110,28 @@
                         display: inline-block;
                         *display: inline;
                         *zoom: 1;
-                        height: 80px;
+                        height: 78px;
                         font-size: 16px;
                         &.chat-edit{
                             width: 280px;
                             textarea{
                                 width: 100%;
                                 height: 100%;
+                                resize: none;
+                                border: none;
+                                border-top: $border;
                             }
                         }
                         &.chat-send{
-                            width: 65px;
+                            width: 68px;
                             vertical-align: top;
                             button{
                                 width: 100%;
                                 height: 100%;
+                                border: $border;
+                                background-color: #00d4b4;
+                                color: #fff;
+                                border-bottom-right-radius: 10px;
                             }
                         }
                     }
@@ -226,14 +248,19 @@
     },
     methods: {
       doSend: function () {
+          console.log("fasong");
         let textMsg = buildTextMsg(this.currUser.userId, this.speakToUser.id, this.inputMsg)
         this.socket.send(JSON.stringify(textMsg))
+        this.inputMsg = '';
       },
       say: function (evt) {
         let userId = evt.target.getAttribute("userid")
         let nikeName = evt.target.getAttribute("nickname")
         this.speakToUser.nickname = nikeName
         this.speakToUser.id = userId
+      },
+      close: function(){
+          window.history.back();
       }
     },
     beforeRouteLeave: function (to, from, next) {
