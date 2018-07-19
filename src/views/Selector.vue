@@ -14,12 +14,18 @@
               </li>
           </ul>
       </div>
-
   </div>
 </template>
 <style lang="scss">
     @import "../assets/scss/main.scss";
     .selector-container{
+        height: 100%;
+        .loading-div {
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
         .selector{
             .refresh{
                 /*position: ;*/
