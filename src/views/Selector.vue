@@ -2,6 +2,7 @@
   <div class="selector-container">
       <div class="loading-div" v-if="onLoad">
           <loading-component></loading-component>
+          <p>正在连接服务...</p>
       </div>
       <div class="selector" v-else>
           <div class="refresh">
@@ -22,9 +23,13 @@
         height: 100%;
         .loading-div {
             display: flex;
+            flex-direction: column;
             height: 100%;
             justify-content: center;
             align-items: center;
+            p {
+                margin-top: 10px;
+            }
         }
         .selector{
             .refresh{
